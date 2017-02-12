@@ -1,0 +1,27 @@
+{
+  "authors": [
+    {
+      "name": "Invokatis Technologies",
+      "email": "admin@invokatis.tech"
+    },
+    {
+      "name": "Vaibhav Pandey",
+      "email": "contact@vaibhavpandey.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "SendOTP\\": "src/"
+    }
+  },
+  "description": "API abstraction for SendOTP service by MSG91.",
+  "homepage": "http://invokatis.github.io/sendotp",
+  "keywords": ["msg91", "sendotp", "client"],
+  "license": "MIT",
+  "name" : "invokatis/sendotp",
+  "require": {
+    "php": "^5.4 || ^7.0",
+    "guzzlehttp/guzzle": "^5.0 || ^6.0"
+  },
+  "type": "library"
+}
