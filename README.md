@@ -62,5 +62,5 @@ See [LICENSE.md][license-url] file.
 [php-version-url]: https://packagist.org/packages/invokatis/sendotp
 [license-image]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [license-url]: LICENSE.md
-[insights-image]: https://insight.sensiolabs.com/projects/be4cdd6c-4a48-49a1-98ce-f76432d7825a/small.png
-[insights-url]: https://insight.sensiolabs.com/projects/be4cdd6c-4a48-49a1-98ce-f76432d7825a
+[insights-image]: https://insight.sensiolabs.com/projects/3e4dcd7b-4dcf-4327-b6d5-489900e8b7d0/small.png
+[insights-url]: https://insight.sensiolabs.com/projects/3e4dcd7b-4dcf-4327-b6d5-489900e8b7d0
