@@ -20,19 +20,14 @@ Usage
 <?php
 
 /**
- * @desc Create a SendOTP\Client with your application key.
+ * @desc Create a SendOTP\Client with your auth key.
  */
-$client = new SendOTP\Client('<application-key>');
+$client = new SendOTP\Client('<auth-key>');
 
 /**
- * @desc Send an OTP to a mobile number.
+ * @desc Send and retrieve whether successful or not.
  */
-$client->generate('9876543210', '91');
-
-/**
- * @desc Send and retrieve generated OTP for a mobile number.
- */
-$otp = $client->generate('9876543210', '91', true);
+$sent = $client->generate('9876543210', '91');
 
 /**
  * @desc Verify an OTP entered by user.
@@ -40,13 +35,6 @@ $otp = $client->generate('9876543210', '91', true);
 $token = $client->verify($_POST['otp'], '9876543210', '91');
 if (false !== $token) {
     // OTP verified successfully!
-}
-
-/**
- * @desc Check status of a previously retrieved token.
- */
-if ($client->status($token, '9876543210', '91')) {
-    // Refresh token verified successfully!
 }
 ```
 
