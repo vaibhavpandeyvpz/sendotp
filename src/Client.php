@@ -37,7 +37,7 @@ class Client implements ClientInterface
     public function __construct($key)
     {
         $this->client = new Guzzle(array(
-            'base_uri' => 'https://sendotp.msg91.com/api/',
+            'base_uri' => 'https://control.msg91.com/api/',
             'http_errors' => false,
         ));
         $this->key = $key;
@@ -46,41 +46,17 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function generate($number, $cc = '91', $retrieve = false)
+    public function generate($number, $cc = '91')
     {
-        $response = $this->client->post('generateOTP', array(
-            'headers' => array('Application-Key' => $this->key),
-            'json' => array(
-                'countryCode' => $cc,
-                'getGeneratedOTP' => $retrieve,
-                'mobileNumber' => $number,
-            ),
-        ));
-        if ($response->getStatusCode() === 200) {
-            $json = json_decode((string)$response->getBody());
-            if ($json->status === 'success') {
-                return $retrieve ? $json->response->oneTimePassword : true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function status($token, $number, $cc = '91')
-    {
-        $response = $this->client->get('checkStatus', array(
-            'headers' => array('Application-Key' => $this->key),
+        $response = $this->client->get('sendotp.php', array(
             'query' => array(
-                'countryCode' => $cc,
-                'mobileNumber' => $number,
-                'refreshToken' => $token,
+                'authkey' => $this->key,
+                'mobile' => $cc.$number,
             ),
         ));
         if ($response->getStatusCode() === 200) {
             $json = json_decode((string)$response->getBody());
-            return $json->status === 'success';
+            return 'success' === $json->type;
         }
         return false;
     }
@@ -90,19 +66,16 @@ class Client implements ClientInterface
      */
     public function verify($input, $number, $cc = '91')
     {
-        $response = $this->client->post('verifyOTP', array(
-            'headers' => array('Application-Key' => $this->key),
-            'json' => array(
-                'countryCode' => $cc,
-                'mobileNumber' => $number,
-                'oneTimePassword' => $input,
+        $response = $this->client->get('verifyRequestOTP.php', array(
+            'query' => array(
+                'authkey' => $this->key,
+                'mobile' => $cc.$number,
+                'otp' => $input,
             ),
         ));
         if ($response->getStatusCode() === 200) {
             $json = json_decode((string)$response->getBody());
-            if ($json->status === 'success') {
-                return $json->response->refreshToken;
-            }
+            return 'success' === $json->type;
         }
         return false;
     }
