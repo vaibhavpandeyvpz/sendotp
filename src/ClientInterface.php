@@ -20,24 +20,15 @@ interface ClientInterface
     /**
      * @param string $number
      * @param string $cc
-     * @param bool $retrieve
-     * @return string|bool
-     */
-    public function generate($number, $cc = '91', $retrieve = false);
-
-    /**
-     * @param string $token
-     * @param string $number
-     * @param string $cc
      * @return bool
      */
-    public function status($token, $number, $cc = '91');
+    public function generate($number, $cc = '91');
 
     /**
      * @param string $input
      * @param string $number
      * @param string $cc
-     * @return string|false
+     * @return bool
      */
     public function verify($input, $number, $cc = '91');
 }
