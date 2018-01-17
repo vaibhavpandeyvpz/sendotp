@@ -49,7 +49,7 @@ class Client implements ClientInterface
     public function generate($number, $cc = '91', array $params = [])
     {
         $response = $this->client->get('sendotp.php', array(
-            'query' = array_merge($params, [
+            'query' => array_merge($params, [
                 'authkey' => $this->key,
                 'mobile' => $cc.$number,
             ]),
