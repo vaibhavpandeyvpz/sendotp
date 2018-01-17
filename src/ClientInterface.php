@@ -20,16 +20,16 @@ interface ClientInterface
     /**
      * @param string $number
      * @param string $cc
+     * @param array $params
      * @return bool
      */
-    public function generate($number, $cc = '91');
+    public function generate($number, $cc = '91', array $params = []);
 
     /**
      * @param string $input
      * @param string $number
      * @param string $cc
-     * @param array $params
      * @return bool
      */
-    public function verify($input, $number, $cc = '91', array $params = []);
+    public function verify($input, $number, $cc = '91');
 }
