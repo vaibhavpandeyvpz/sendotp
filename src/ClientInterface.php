@@ -28,7 +28,8 @@ interface ClientInterface
      * @param string $input
      * @param string $number
      * @param string $cc
+     * @param array $params
      * @return bool
      */
-    public function verify($input, $number, $cc = '91');
+    public function verify($input, $number, $cc = '91', array $params = []);
 }
