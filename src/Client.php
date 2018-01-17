@@ -46,13 +46,13 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function generate($number, $cc = '91')
+    public function generate($number, $cc = '91', array $params = [])
     {
         $response = $this->client->get('sendotp.php', array(
-            'query' => array(
+            'query' = array_merge($params, [
                 'authkey' => $this->key,
                 'mobile' => $cc.$number,
-            ),
+            ]),
         ));
         if ($response->getStatusCode() === 200) {
             $json = json_decode((string)$response->getBody());
