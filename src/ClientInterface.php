@@ -26,6 +26,14 @@ interface ClientInterface
     public function generate($number, $cc = '91', array $params = []);
 
     /**
+     * @param string $number
+     * @param string $cc
+     * @param string $type
+     * @return bool
+     */
+    public function resend($number, $cc = '91', $type = 'voice');
+
+    /**
      * @param string $input
      * @param string $number
      * @param string $cc

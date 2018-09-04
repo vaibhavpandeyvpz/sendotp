@@ -32,8 +32,8 @@ $sent = $client->generate('9876543210', '91');
 /**
  * @desc Verify an OTP entered by user.
  */
-$token = $client->verify($_POST['otp'], '9876543210', '91');
-if (false !== $token) {
+$ok = $client->verify($_POST['otp'], '9876543210', '91');
+if ($ok) {
     // OTP verified successfully!
 }
 ```

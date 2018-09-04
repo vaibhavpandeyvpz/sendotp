@@ -20,6 +20,9 @@ use GuzzleHttp\ClientInterface as GuzzleInterface;
  */
 class Client implements ClientInterface
 {
+    const RESEND_TEXT = 'text';
+    const RESEND_VOICE = 'voice';
+
     /**
      * @var GuzzleInterface
      */
@@ -48,8 +51,8 @@ class Client implements ClientInterface
      */
     public function generate($number, $cc = '91', array $params = [])
     {
-        $response = $this->client->get('sendotp.php', array(
-            'query' => array_merge($params, [
+        $response = $this->client->post('sendotp.php', array(
+            'form_params' => array_merge($params, [
                 'authkey' => $this->key,
                 'mobile' => $cc.$number,
             ]),
@@ -64,10 +67,29 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
+    public function resend($number, $cc = '91', $type = self::RESEND_VOICE)
+    {
+        $response = $this->client->post('retryotp.php', array(
+            'form_params' => array(
+                'authkey' => $this->key,
+                'mobile' => $cc.$number,
+                'retrytype' => $type,
+            ),
+        ));
+        if ($response->getStatusCode() === 200) {
+            $json = json_decode((string)$response->getBody());
+            return 'success' === $json->type;
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function verify($input, $number, $cc = '91')
     {
-        $response = $this->client->get('verifyRequestOTP.php', array(
-            'query' => array(
+        $response = $this->client->post('verifyRequestOTP.php', array(
+            'form_params' => array(
                 'authkey' => $this->key,
                 'mobile' => $cc.$number,
                 'otp' => $input,
