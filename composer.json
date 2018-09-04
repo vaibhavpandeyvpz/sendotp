@@ -2,7 +2,7 @@
   "authors": [
     {
       "name": "Invokatis Technologies",
-      "email": "admin@invokatis.tech"
+      "email": "contact@invokatis.com"
     },
     {
       "name": "Vaibhav Pandey",
@@ -21,6 +21,7 @@
   "name" : "invokatis/sendotp",
   "require": {
     "php": "^5.4 || ^7.0",
+    "ext-json": "*",
     "guzzlehttp/guzzle": "^5.0 || ^6.0"
   },
   "type": "library"
