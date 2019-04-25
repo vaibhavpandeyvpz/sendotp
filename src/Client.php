@@ -60,7 +60,7 @@ class Client implements ClientInterface
         ]);
         if ($response->getStatusCode() === 200) {
             $json = json_decode((string)$response->getBody());
-            return 'success' === $json->type;
+            return isset($json->type) && ('success' === $json->type);
         }
         return false;
     }
